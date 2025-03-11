@@ -1,32 +1,59 @@
+// Base class Book
 public class Book {
-    String title,author;
-    int price;
-    Book(){
-        title="ABC";
-        author="ABC";
-        price=908;
+    public String ISBN;            // public access modifier
+    protected String title;        // protected access modifier
+    private String author;         // private access modifier
+
+    // Constructor to initialize the Book details
+    Book(String ISBN, String title, String author) {
+        this.ISBN = ISBN;
+        this.title = title;
+        this.author = author;
     }
 
-    Book(String title,String author,int price){
-        this.title=title;
-        this.price=price;
-        this.author=author;
+    // Method to get the author
+    public String getAuthor() {
+        return author;
     }
 
-    void Display()
-    {
-        System.out.println("Title "+title);
-        System.out.println("Author "+author);
-        System.out.println("price "+price);
+    // Method to set the author
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
+    // Method to display the author
+    public void displayAuthor() {
+        System.out.println("Author: " + author);
+    }
+
+    // Main method to test the class
     public static void main(String[] args) {
-        Book b=new Book();
+        // Creating an instance of EBook
+        EBook eBook = new EBook("12345", "Java Programming", "John Doe");
 
-        Book b1=new Book("parametrize","Parametrize",9087);
+        // Accessing the ISBN (public)
+        System.out.println("ISBN: " + eBook.ISBN);
 
-        b.Display();
-        b1.Display();
+        // Accessing the title (protected)
+        System.out.println("Title: " + eBook.title);
+
+        // Accessing and modifying the author (private in the parent class, accessed through methods)
+        System.out.println("Author: " + eBook.getAuthor());
+        eBook.setAuthor("Jane Smith");
+        System.out.println("Updated Author: " + eBook.getAuthor());
+
+        // Display author using the method in the Book class
+        eBook.displayAuthor();
+    }
+}
+
+// Subclass EBook that extends Book
+class EBook extends Book {
+
+    // Constructor to initialize EBook, calling the parent class constructor
+    EBook(String ISBN, String title, String author) {
+        super(ISBN, title, author);
     }
 
+    // Additional methods for EBook can be added here
 }
